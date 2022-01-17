@@ -21,6 +21,8 @@ Notes:
 #ifndef TACTIC_H_
 #define TACTIC_H_
 
+#include <atomic>
+
 #include "tactic/goal.h"
 #include "util/params.h"
 #include "util/statistics.h"
@@ -32,7 +34,7 @@ class progress_callback;
 typedef ptr_buffer<goal> goal_buffer;
 
 class tactic {
-    unsigned m_ref_count;
+  std::atomic<unsigned> m_ref_count;
 public:
     tactic():m_ref_count(0) {}
     virtual ~tactic() {}

@@ -24,6 +24,8 @@ Revision History:
 #ifndef PROBE_H_
 #define PROBE_H_
 
+#include <atomic>
+
 #include "tactic/goal.h"
 
 class probe {
@@ -41,7 +43,7 @@ public:
     };
 
 private:
-    unsigned m_ref_count;
+  std::atomic<unsigned> m_ref_count;
 
 public:
     probe():m_ref_count(0) {}
