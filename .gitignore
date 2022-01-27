@@ -79,3 +79,4 @@ doc/code
 .vs
 examples/**/obj
 CMakeSettings.json
+install/
