@@ -2306,7 +2306,11 @@ namespace z3 {
         solver(context & c, simple):object(c) { init(Z3_mk_simple_solver(c)); }
         solver(context & c, Z3_solver s):object(c) { init(s); }
         solver(context & c, char const * logic):object(c) { init(Z3_mk_solver_for_logic(c, c.str_symbol(logic))); }
-        solver(context & c, solver const& src, translate): object(c) { init(Z3_solver_translate(src.ctx(), src, c)); }
+        solver(context & c, solver const& src, translate): object(c) {
+	  Z3_solver s = Z3_solver_translate(src.ctx(), src, c);
+	  src.check_error();
+	  init(s);
+	}
         solver(solver const & s):object(s) { init(s.m_solver); }
         ~solver() { Z3_solver_dec_ref(ctx(), m_solver); }
         operator Z3_solver() const { return m_solver; }
