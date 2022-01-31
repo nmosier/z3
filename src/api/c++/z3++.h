@@ -80,11 +80,12 @@ namespace z3 {
     /**
        \brief Exception used to sign API usage errors.
     */
-    class exception {
+  class exception: public std::exception {
         std::string m_msg;
     public:
         exception(char const * msg):m_msg(msg) {}
         char const * msg() const { return m_msg.c_str(); }
+    virtual const char *what() const noexcept override { return msg(); }
         friend std::ostream & operator<<(std::ostream & out, exception const & e);
     };
     inline std::ostream & operator<<(std::ostream & out, exception const & e) { out << e.msg(); return out; }
